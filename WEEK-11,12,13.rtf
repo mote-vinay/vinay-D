@@ -1,0 +1,312 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}{\f1\fnil\fcharset2 Wingdings;}{\f2\fnil\fcharset0 Lucida Sans Unicode;}{\f3\fnil\fcharset0 Trebuchet MS;}{\f4\fnil\fcharset0 Calibri;}{\f5\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;\red54\green64\blue80;\red247\green247\blue248;}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\b\f0\fs20\lang9 8. Integrating Kubernates with Dockers. \par
+1. Install Docker Desktop \par
+Docker Desktop is freely available in a community edition, for Windows and Mac. Start by \par
+downloading and installing the right version for you: \par
+\f1\'b7\f0  Windows 10 (Professional or Enterprise) \par
+\f1\'b7\f0  Mac OS X (Sierra 10.12 minimum) \par
+Older operating systems can\rquote t use Docker Desktop :( You can use Docker Toolbox instead, \par
+but that doesn\rquote t come with Kubernetes - so you\rquote ll need to run Kubernetes in Docker. \par
+2. Enable Kubernetes \par
+Kubernetes itself runs in containers. When you deploy a Kubenetes cluster you first install \par
+Docker (or another container runtime like containerd) and then use tools like kubeadm which \par
+starts all the Kubernetes components in containers. Docker Desktop does all that for you. \par
+Make sure you have Docker Desktop running - in the taskbar in Windows and the menu bar \par
+on the Mac you\rquote ll see Docker\rquote s whale logo. Click the whale and select Settings: \par
+ \par
+A new screen opens with all of Docker Desktop\rquote s configuration options. Click \par
+on Kubernetes and check the Enable Kubernetes checkbox: \par
+That\rquote s it! Docker Desktop will download all the Kubernetes images in the background and \par
+get everything started up. When it\rquote s ready you\rquote ll see two green lights in the bottom of the \par
+settings screen saying Docker running and Kubernetes running. \par
+The star in the screenshot shows the Reset Kubernetes Cluster button, which is one of the \par
+reasons why Docker Desktop is the best of the local Kubernetes options. Click that and it \par
+will reset your cluster back to a fresh install of Kubernetes. \par
+3. Verify your Kubernetes cluster \par
+If you\rquote ve worked with Docker before, you\rquote re used to managing containers with \par
+the docker and docker-compose command lines. Kubernetes uses a different tool \par
+called kubectl to manage apps - Docker Desktop installs kubectl for you too. \par
+Check the state of your Docker Desktop cluster: \par
+kubectl get nodes \par
+You should see a single node in the output called docker-desktop. That\rquote s a full Kubernetes \par
+cluster, with a single node that runs the Kubernetes API and your own applications. \par
+The Kubernetes components are running in Docker containers, but Docker Desktop doesn\rquote t \par
+show them by default to keep things simple when you\rquote re running docker commands. \par
+Try: \par
+docker container ls \par
+and you\rquote ll see zero containers (unless you have some of your own running). \par
+But try: \par
+docker info \par
+And you\rquote ll see a whole bunch of containers in the running state (18 on my machine), which \par
+are the various parts of Kubernetes.\par
+EXPERIMENT\expndtw-7  \expndtw0 NO.:\expndtw-2  \expndtw0 11.\expndtw46  \expndtw0\fs24 Install\expndtw-3  \expndtw0 and\expndtw-3  \expndtw0 Explore\expndtw-2  \expndtw0 Selenium\expndtw-2  \expndtw0 for\expndtw-7  \expndtw0 automated\expndtw-3  \expndtw0 testing\fs20\par
+\fs22\par
+
+\pard\sb10\fs26\par
+
+\pard\li101\fs24 AIM\fs20 :\expndtw-5  \expndtw0\fs24 Install\expndtw-3  \expndtw0 and\expndtw-3  \expndtw0 Explore\expndtw-2  \expndtw0 Selenium\expndtw-4  \expndtw0 for\expndtw-6  \expndtw0 automated\expndtw-3  \expndtw0 testing\fs20\par
+
+\pard\fs22\par
+
+\pard\sb9\par
+
+\pard\li101\fs24 DESCRIPTION:\par
+
+\pard\par
+
+\pard\li102\b0 To\expndtw11  \expndtw0 install\expndtw11  \expndtw0 and\expndtw13  \expndtw0 explore\expndtw12  \expndtw0 Selenium\expndtw13  \expndtw0 for\expndtw11  \expndtw0 automated\expndtw14  \expndtw0 testing,\expndtw11  \expndtw0 you\expndtw12  \expndtw0 can\expndtw13  \expndtw0 follow\expndtw12  \expndtw0 these\expndtw-57  \expndtw0 steps:\par
+
+\pard\par
+
+\pard\li102 Install\expndtw-3  \expndtw0 Java\expndtw-3  \expndtw0 Development\expndtw-2  \expndtw0 Kit\expndtw-2  \expndtw0 (JDK):\par
+
+\pard\sb8\fs22\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li822\ri108\sl360\slmult1\qj\tx822\fs24 Selenium is written in Java, so you'll need to install JDK in order to\expndtw1  \expndtw0 run it. You can download and install JDK from the official Oracle\expndtw1  \expndtw0 website.\f2\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li822\sl360\slmult1\qj\tx822\f0 Install\expndtw-8  \expndtw0 the\expndtw-6  \expndtw0 Selenium\expndtw-11  \expndtw0 WebDriver:\f2\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li822\ri102\sl360\slmult1\qj\tx822\f0 You\expndtw-5  \expndtw0 can\expndtw-5  \expndtw0 download\expndtw-3  \expndtw0 the\expndtw-5  \expndtw0 latest\expndtw-4  \expndtw0 version\expndtw-3  \expndtw0 of\expndtw-5  \expndtw0 the\expndtw-5  \expndtw0 Selenium\expndtw-9  \expndtw0 WebDriver\expndtw-3  \expndtw0 from\expndtw-57  \expndtw0 the Selenium website. You'll also need to download the appropriate\expndtw1  \expndtw0 driver\expndtw12  \expndtw0 for\expndtw10  \expndtw0 your\expndtw10  \expndtw0 web\expndtw10  \expndtw0 browser\expndtw10  \expndtw0 of\expndtw10  \expndtw0 choice\expndtw10  \expndtw0 (e.g.\expndtw12  \expndtw0 Chrome\expndtw10  \expndtw0 Driver\expndtw12  \expndtw0 for\f2\par
+
+\pard\li822\sl360\slmult1\qj\f0 Google\expndtw-1  \expndtw0 Chrome).\par
+
+\pard\li102\sl360\slmult1\qj Install\expndtw-4  \expndtw0 an\expndtw-2  \expndtw0 Integrated\expndtw-1  \expndtw0 Development\expndtw-3  \expndtw0 Environment\expndtw-3  \expndtw0 (IDE):\par
+
+\pard\sl360\slmult1\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li822\ri110\sl360\slmult1\qj\tx822 To write and run Selenium tests, you'll need an IDE. Some popular\expndtw1  \expndtw0 choices\expndtw-2  \expndtw0 include\expndtw-3  \expndtw0 Eclipse,\expndtw-2  \expndtw0 IntelliJ IDEA,\expndtw-2  \expndtw0 and\expndtw-7  \expndtw0 Visual\expndtw-3  \expndtw0 Studio\expndtw-1  \expndtw0 Code.\f2\par
+
+\pard\sl360\slmult1\qj\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-361\li822\sb40\tx821\tx822\f0 Write\expndtw-3  \expndtw0 a\expndtw-5  \expndtw0 simple\expndtw-3  \expndtw0 test:\f2\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li821\ri110\sl360\slmult1\tx821\tx822\f0 Once\expndtw4  \expndtw0 you\expndtw2  \expndtw0 have\expndtw3  \expndtw0 your\expndtw4  \expndtw0 IDE\expndtw1  \expndtw0 set\expndtw3  \expndtw0 up,\expndtw4  \expndtw0 you\expndtw2  \expndtw0 can\expndtw4  \expndtw0 write\expndtw3  \expndtw0 a\expndtw3  \expndtw0 simple\expndtw3  \expndtw0 test\expndtw3  \expndtw0 using\expndtw4  \expndtw0 the\expndtw-57  \expndtw0 Selenium\expndtw-8  \expndtw0 WebDriver.\expndtw-1  \expndtw0 Here's\expndtw-1  \expndtw0 an example\expndtw-1  \expndtw0 in\expndtw-1  \expndtw0 Java:\f2\par
+
+\pard\sl360\slmult1\f0\par
+
+\pard\li101\sl360\slmult1 import\expndtw-15  \expndtw0 org.openqa.selenium.WebDriver;\par
+import\expndtw-8  \expndtw0 org.openqa.selenium.chrome.ChromeDriver;\par
+
+\pard\sl360\slmult1\par
+
+\pard\li101\sl360\slmult1 public\expndtw-3  \expndtw0 class\expndtw-1  \expndtw0 Main \{\par
+
+\pard\fi-116\li337\ri107\sl360\slmult1 public static void main(String[] args) \{\expndtw1  \expndtw-1 System.setProperty("webdriver.chrome.driver",\expndtw8  \expndtw0 "path/to/chromedriver");\expndtw-57  \expndtw0 WebDriver driver = new ChromeDriver();\expndtw1  \expndtw0 driver.get("https://{\cf1{\field{\*\fldinst{HYPERLINK "http://www.google.com/"}}{\fldrslt{\ul\cf1\ul www.google.com}}}}\f0\fs24 ");\expndtw1  \expndtw0 System.out.println(driver.getTitle());\par
+
+\pard\li342\sl360\slmult1 driver.quit();\par
+
+\pard\li222\sl360\slmult1\}\par
+
+\pard\li101\sl360\slmult1\}\par
+
+\pard\sb2\fs20\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-361\li822\sl360\slmult1\tx821\tx822\fs24 Run\expndtw-2  \expndtw0 the test:\f2\par
+
+\pard\li101\sl360\slmult1\f0 Run\expndtw17  \expndtw0 the\expndtw20  \expndtw0 test\expndtw18  \expndtw0 using\expndtw18  \expndtw0 your\expndtw18  \expndtw0 IDE\expndtw18  \expndtw0 or\expndtw18  \expndtw0 from\expndtw19  \expndtw0 the\expndtw17  \expndtw0 command\expndtw20  \expndtw0 line\expndtw17  \expndtw0 using\expndtw18  \expndtw0 the\expndtw18  \expndtw0 following\par
+command:\par
+
+\pard\sl360\slmult1\par
+
+\pard\li101\sl360\slmult1 $\expndtw-2  \expndtw0 javac\expndtw-2  \expndtw0 Main.java\par
+$\expndtw-1  \expndtw0 java\expndtw-2  \expndtw0 Main\par
+
+\pard\sl360\slmult1\par
+
+\pard\li102\ri107\sl360\slmult1\qj This is a basic example of how to get started with Selenium for automated\expndtw1  \expndtw0 testing. In a real-world scenario, you would likely write more complex tests\expndtw1  \expndtw0 and\expndtw54  \expndtw0 organize\expndtw55  \expndtw0 your\expndtw55  \expndtw0 code\expndtw54  \expndtw0 into\expndtw54  \expndtw0 test\expndtw54  \expndtw0 suites\expndtw56  \expndtw0 and\expndtw55  \expndtw0 test\expndtw54  \expndtw0 cases,\expndtw52  \expndtw0 but\expndtw54  \expndtw0 this\expndtw56  \expndtw0 example\expndtw-58  \expndtw0 should\expndtw-1  \expndtw0 give\expndtw1  \expndtw0 you\expndtw-1  \expndtw0 a\expndtw-1  \expndtw0 good\expndtw-1  \expndtw0 starting point for\expndtw-1  \expndtw0 exploring\expndtw1  \expndtw0 Selenium.\par
+
+\pard\sl360\slmult1\fs26\par
+
+\pard\li102\sb218\qj\b\fs24\par
+
+\pard\sb90 EXPERIMENT\expndtw46  \expndtw0 NO.:\expndtw51  \expndtw0 12.\expndtw55  \expndtw0 Write\expndtw50  \expndtw0 a\expndtw50  \expndtw0 simple\expndtw53  \expndtw0 program\expndtw51  \expndtw0 in\expndtw52  \expndtw0 JavaScript\expndtw50  \expndtw0 and\expndtw-57  \expndtw0 perform testing using Selenium\par
+
+\pard\par
+
+\pard\li102 AIM:\expndtw17  \expndtw0 Write\expndtw15  \expndtw0 a\expndtw17  \expndtw0 simple\expndtw18  \expndtw0 program\expndtw17  \expndtw0 in\expndtw17  \expndtw0 JavaScript\expndtw17  \expndtw0 and\expndtw17  \expndtw0 perform\expndtw17  \expndtw0 testing\expndtw16  \expndtw0 using\expndtw-57  \expndtw0 Selenium\par
+
+\pard\fs26\par
+
+\pard\li102\sb218\fs24 PROGRAM:\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-360\li822\sb102\tx821\tx822\cf2\highlight3\b0 Si\expndtw-1 m\expndtw-2 p\expndtw0 le\expndtw15  \expndtw-1 Ja\expndtw1 v\expndtw-1 a\expndtw0 S\expndtw-2 c\expndtw-1 r\expndtw0 ipt\expndtw14  \expndtw0 p\expndtw-5 r\expndtw-1 o\expndtw0 g\expndtw-1 r\expndtw0 am\expndtw14  \expndtw-1 t\expndtw0 h\expndtw-1 a\expndtw0 t\expndtw16  \expndtw-1 yo\expndtw0 u\expndtw15  \expndtw-2 c\expndtw-1 a\expndtw0 n\expndtw15  \expndtw-1 t\expndtw0 e\expndtw-1 s\expndtw0 t\expndtw16  \expndtw0 u\expndtw-3 s\expndtw0 ing\expndtw14  \expndtw0 S\expndtw-2 e\expndtw0 le\expndtw-2 n\expndtw0 ium\cf0\highlight0\par
+
+\pard\li101\sb93\cf2\highlight3\expndtw-1 <!DOCTYPE\expndtw-17  \expndtw0 html>\cf0\highlight0\par
+
+\pard\li101\sb141\cf2\highlight3 <html>\cf0\highlight0\par
+
+\pard\li101\sb140\cf2\highlight3 <head>\cf0\highlight0\par
+
+\pard\li100\sb141\cf2\highlight3   \expndtw-24  \expndtw-1 <t\expndtw0 i\expndtw-1 t\expndtw0 le\expndtw-1 >\expndtw-2 S\expndtw0 i\expndtw-1 m\expndtw0 p\expndtw-2 l\expndtw0 e\expndtw15  \expndtw0 J\expndtw-1 ava\expndtw2 S\expndtw-2 c\expndtw-1 r\expndtw0 ipt\expndtw14  \expndtw-5 Pr\expndtw-1 o\expndtw0 g\expndtw1 r\expndtw-1 am</t\expndtw0 i\expndtw-1 t\expndtw0 le>\cf0\highlight0\par
+
+\pard\li101\sb140\cf2\highlight3\expndtw-1 </\expndtw0 he\expndtw-1 a\expndtw0 d>\cf0\highlight0\par
+
+\pard\li101\sb141\cf2\highlight3 <body>\cf0\highlight0\par
+
+\pard\li100\sb140\cf2\highlight3   \expndtw-24  \expndtw-1 <\expndtw0 p\expndtw14  \expndtw0 id\expndtw-3 =\expndtw0 "\expndtw-1 o\expndtw0 u\expndtw-1 t\expndtw0 pu\expndtw-1 t\expndtw0 "\expndtw-1 >0</\expndtw0 p>\cf0\highlight0\par
+
+\pard\li100\sb141\cf2\highlight3   \expndtw-24  \expndtw-1 <\expndtw0 bu\expndtw-1 tto\expndtw0 n\expndtw15  \expndtw0 id\expndtw-1 =\expndtw-2 "\expndtw0 in\expndtw-2 c\expndtw-5 r\expndtw0 e\expndtw-1 m\expndtw0 en\expndtw-3 t\expndtw0 -bu\expndtw-1 tto\expndtw0 n"\expndtw-1 >I\expndtw0 n\expndtw-2 c\expndtw-5 r\expndtw0 e\expndtw-1 m\expndtw0 en\expndtw-1 t</\expndtw0 bu\expndtw-1 tto\expndtw0 n>\cf0\highlight0\par
+
+\pard\li100\sb140\cf2\highlight3   \expndtw-24  \expndtw0 <script>\cf0\highlight0\par
+
+\pard\li100\sb141\tx380\cf2\highlight3  \tab const\expndtw33  \expndtw0 output\expndtw34  \expndtw0 =\expndtw37  \expndtw0 document.getElementById("output");\cf0\highlight0\par
+
+\pard\fi-2\li101\ri103\sb140\sl372\slmult0\tx3300\tx4696\tx7350\cf2\highlight3  \tab const\tab incrementButton\tab =\highlight0\expndtw-84  \highlight3\expndtw0 document.getElementById("increment-button");\cf0\highlight0\par
+
+\pard\sl372\slmult0\f3\fs22\par
+
+\pard\li100\sb98\tx380\cf2\highlight3\f0\fs24 let\expndtw-11  \expndtw0 count\expndtw-10  \expndtw0 =\expndtw-10  \expndtw0 0;\cf0\highlight0\par
+
+\pard\li100\sb140\tx380\cf2\highlight3  \tab incrementButton.addEventListener("click",\expndtw21  \expndtw0 function()\expndtw21  \expndtw0\{\cf0\highlight0\par
+
+\pard\li100\sb141\tx520\cf2\highlight3  \tab count\expndtw-4  \expndtw0 +=\expndtw-3  \expndtw0 1;\cf0\highlight0\par
+\cf2\highlight3  \tab output.innerHTML\expndtw13  \expndtw0 =\expndtw15  \expndtw0 count;\cf0\highlight0\par
+
+\pard\li100\sb140\tx380\cf2\highlight3  \tab\});\cf0\highlight0\par
+
+\pard\li100\sb141\cf2\highlight3   \expndtw-24  \expndtw-1 </\expndtw1 s\expndtw-2 c\expndtw-1 r\expndtw0 ip\expndtw-1 t\expndtw0 >\cf0\highlight0\par
+
+\pard\li101\sb140\cf2\highlight3\expndtw-1 </\expndtw0 b\expndtw-1 o\expndtw0 d\expndtw-1 y\expndtw0 >\cf0\highlight0\par
+
+\pard\li101\sb141\cf2\highlight3\expndtw-1 </\expndtw0 h\expndtw-1 tm\expndtw0 l>\cf0\highlight0\par
+
+\pard\f3\fs26\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent360{\pntxtb\'B7}}\fi-361\li822\sl360\slmult1\tx821\tx822\cf2\highlight3\f0\fs28 Write\expndtw9  \expndtw0 a\expndtw7  \expndtw0 test\expndtw11  \expndtw0 case\expndtw9  \expndtw0 for\expndtw11  \expndtw0 this\expndtw9  \expndtw0 program\expndtw9  \expndtw0 using\expndtw8  \expndtw0 Selenium\cf0\highlight0\par
+
+\pard\li101\sl360\slmult1\fs24 import\expndtw-6  \expndtw0 org.openqa.selenium.By;\par
+import\expndtw-15  \expndtw0 org.openqa.selenium.WebDriver;\par
+
+\pard\li101\ri2527\sl360\slmult1 import\expndtw-14  \expndtw0 org.openqa.selenium.chrome.ChromeDriver;\expndtw-57  \expndtw0 import\expndtw-2  \expndtw0 org.junit.After;\par
+
+\pard\li101\ri5226\sl360\slmult1\expndtw-1 import \expndtw0 org.junit.Before;\expndtw-57  \expndtw0 import\expndtw-6  \expndtw0 org.junit.Test;\par
+
+\pard\sl360\slmult1\par
+
+\pard\li101\sl360\slmult1 public\expndtw-3  \expndtw0 class\expndtw-1  \expndtw0 Main \{\par
+
+\pard\li222\sl360\slmult1 private\expndtw-12  \expndtw0 WebDriver\expndtw-8  \expndtw0 driver;\par
+
+\pard\sl360\slmult1\par
+
+\pard\li222\sl360\slmult1 @Before\par
+public\expndtw-3  \expndtw0 void setUp()\expndtw-1  \expndtw0\{\par
+
+\pard\li342\sl360\slmult1\expndtw-1 System.setProperty("webdriver.chrome.driver",\expndtw8  \expndtw0 "path/to/chromedriver");\expndtw-57  \expndtw0 driver = new ChromeDriver();\par
+
+\pard\li222\sl360\slmult1\}\par
+
+\pard\sl360\slmult1\par
+
+\pard\li222\sl360\slmult1 @Test\par
+
+\pard\fi-120\li342\ri1414\sl360\slmult1 public void testIncrementButton() \{\expndtw1  \expndtw0 driver.get("file:///path/to/program.html");\expndtw1  \expndtw0 driver.findElement(By.id("increment-button")).click();\expndtw1  \expndtw-1 String result = driver.findElement(By.id("output")).getText();\expndtw-57  \expndtw0 assert\expndtw-2  \expndtw0 result.equals("1");\par
+
+\pard\li222\sl360\slmult1\}\par
+
+\pard\fs22\par
+
+\pard\sb1\fs23\par
+
+\pard\li222\sb90\fs24 @After\par
+
+\pard\fi-120\li342\ri4970 public void tearDown() \{\expndtw-57  \expndtw0 driver.quit();\par
+
+\pard\li222\}\par
+
+\pard\li101\}\par
+
+\pard\li101\sb120 You\expndtw-4  \expndtw0 can\expndtw-4  \expndtw0 run\expndtw-4  \expndtw0 the\expndtw-4  \expndtw0 test\expndtw-3  \expndtw0 case\expndtw-4  \expndtw0 using\expndtw-4  \expndtw0 the\expndtw-3  \expndtw0 following\expndtw-4  \expndtw0 command:\par
+$\expndtw-2  \expndtw0 javac\expndtw-2  \expndtw0 Main.java\par
+$\expndtw-1  \expndtw0 java\expndtw-2  \expndtw0 Main\par
+The\expndtw-1  \expndtw0 output\expndtw-1  \expndtw0 of\expndtw-1  \expndtw0 the\expndtw-2  \expndtw0 test case\expndtw-2  \expndtw0 should\expndtw-1  \expndtw0 be:\par
+.\par
+Time:\expndtw-4  \expndtw0 0.189\par
+OK\expndtw-1  \expndtw0 (1\expndtw-1  \expndtw0 test)\par
+
+\pard\fs26\par
+
+\pard\li102\sb217\sl343\slmult0\fs24 This\expndtw10  \expndtw0 output\expndtw8  \expndtw0 indicates\expndtw8  \expndtw0 that\expndtw8  \expndtw0 the\expndtw9  \expndtw0 test\expndtw8  \expndtw0 case\expndtw9  \expndtw0 passed,\expndtw10  \expndtw0 and\expndtw9  \expndtw0 the\expndtw9  \expndtw0 increment\expndtw9  \expndtw0 button\expndtw9  \expndtw0 was\expndtw-57  \expndtw0 successfully clicked,\expndtw-1  \expndtw0 causing\expndtw1  \expndtw0 the\expndtw-2  \expndtw0 output\expndtw-1  \expndtw0 to be\expndtw-2  \expndtw0 incremented\expndtw-1  \expndtw0 by 1.\par
+
+\pard\sb90\sl276\slmult1\b EXPERIMENT\expndtw21  \expndtw0 NO.:\expndtw22  \expndtw0 13.Develop\expndtw26  \expndtw0 test\expndtw25  \expndtw0 cases\expndtw24  \expndtw0 for\expndtw20  \expndtw0 the\expndtw23  \expndtw0 above\expndtw24  \expndtw0 containerized\expndtw-57  \expndtw0 application\expndtw-1  \expndtw0 using selenium\par
+
+\pard\li102\ri103\sb200\sl276\slmult1 AIM:\expndtw32  \expndtw0 Develop\expndtw34  \expndtw0 test\expndtw31  \expndtw0 cases\expndtw34  \expndtw0 for\expndtw27  \expndtw0 the\expndtw33  \expndtw0 above\expndtw31  \expndtw0 containerized\expndtw33  \expndtw0 application\expndtw34  \expndtw0 using\expndtw-57  \expndtw0 selenium\par
+
+\pard\li102\sb199 PROGRAM:\par
+
+\pard\sb3\fs21\par
+
+\pard\li102\sl360\slmult1\b0\fs24 Here\expndtw-6  \expndtw0 is\expndtw-6  \expndtw0 an\expndtw-7  \expndtw0 example\expndtw-7  \expndtw0 of\expndtw-5  \expndtw0 how\expndtw-5  \expndtw0 you\expndtw-6  \expndtw0 could\expndtw-6  \expndtw0 write\expndtw-5  \expndtw0 test\expndtw-6  \expndtw0 cases\expndtw-8  \expndtw0 for\expndtw-5  \expndtw0 the\expndtw-6  \expndtw0 containerized\expndtw-46  \expndtw0 application\expndtw-1  \expndtw0 using Selenium\par
+import\expndtw-6  \expndtw0 org.openqa.selenium.By;\par
+import\expndtw-15  \expndtw0 org.openqa.selenium.WebDriver;\par
+
+\pard\li102\ri2526\sl360\slmult1 import\expndtw-14  \expndtw0 org.openqa.selenium.chrome.ChromeDriver;\expndtw-57  \expndtw0 import\expndtw-2  \expndtw0 org.junit.After;\par
+
+\pard\li102\ri5242\sl360\slmult1\expndtw-1 import org.junit.Before;\expndtw-57  \expndtw0 import\expndtw-6  \expndtw0 org.junit.Test;\par
+
+\pard\sl360\slmult1\par
+
+\pard\li102\sl360\slmult1 public\expndtw-3  \expndtw0 class\expndtw-1  \expndtw0 Main \{\par
+
+\pard\li222\sl360\slmult1 private\expndtw-12  \expndtw0 WebDriver\expndtw-8  \expndtw0 driver;\par
+
+\pard\sl360\slmult1\par
+
+\pard\li222\sl360\slmult1 @Before\par
+public\expndtw-3  \expndtw0 void setUp()\expndtw-1  \expndtw0\{\par
+
+\pard\li342\sl360\slmult1\expndtw-1 System.setProperty("webdriver.chrome.driver",\expndtw8  \expndtw0 "path/to/chromedriver");\expndtw-57  \expndtw0 driver = new ChromeDriver();\par
+
+\pard\sl360\slmult1\fs22\par
+
+\pard\li222\sl360\slmult1\fs24\}\par
+
+\pard\sl360\slmult1\fs23\par
+
+\pard\li222\sl360\slmult1\fs24 @Test\par
+
+\pard\fi-120\li342\ri3962\sl360\slmult1\qj public void testHomePageLoads() \{\expndtw-58  \expndtw-1 driver.get("http://localhost:8080");\expndtw-58  \expndtw0 String\expndtw-2  \expndtw0 title\expndtw-4  \expndtw0 =\expndtw-3  \expndtw0 driver.getTitle();\par
+
+\pard\li342\sl360\slmult1\qj assert\expndtw-5  \expndtw0 title.equals("My\expndtw-3  \expndtw0 Containerized\expndtw-15  \expndtw0 Application");\par
+
+\pard\li222\sl360\slmult1\}\par
+
+\pard\sl360\slmult1    @Test\par
+
+\pard\fi-120\li342\ri1074\sl360\slmult1 public\expndtw-2  \expndtw0 void\expndtw1  \expndtw0 testSubmitForm()\expndtw1  \expndtw0\{\expndtw1  \expndtw0 driver.get("http://localhost:8080");\expndtw1  \expndtw-1 driver.findElement(By.name("name")).sendKeys("John\expndtw0  Doe");\par
+
+\pard\fi411\li101\sl360\slmult1\expndtw-1 driver.findElement(By.name("email")).sendKeys{\cf1{\field{\*\fldinst{HYPERLINK "mailto:john.doe@example.co"}}{\fldrslt{\ul\cf1\ul ("john.do}}}}\f0\fs24 e@{\cf1{\field{\*\fldinst{HYPERLINK "mailto:john.doe@example.co"}}{\fldrslt{\ul\cf1\ul example.co}}}}\expndtw-57\f0\fs24  \expndtw0 m");\par
+
+\pard\li342\sl360\slmult1 driver.findElement(By.name("submit")).click();\par
+
+\pard\li342\ri1490\sl360\slmult1\expndtw-1 String result = driver.findElement(By.id("result")).getText();\expndtw-57  \expndtw0 assert\expndtw-3  \expndtw0 result.equals("Form\expndtw-1  \expndtw0 submitted successfully!");\par
+
+\pard\li222\sl360\slmult1\}\par
+@After\par
+
+\pard\fi-120\li342\ri4970\sl360\slmult1 public void tearDown() \{\expndtw-57  \expndtw0 driver.quit();\par
+
+\pard\li222\sl360\slmult1\}\par
+
+\pard\li101\sl360\slmult1\}\par
+\cf2\highlight3\fs28 You\expndtw7  \expndtw0 can\expndtw8  \expndtw0 run\expndtw7  \expndtw0 the\expndtw7  \expndtw0 test\expndtw6  \expndtw0 cases\expndtw7  \expndtw0 using\expndtw6  \expndtw0 the\expndtw7  \expndtw0 following\expndtw6  \expndtw0 command:\cf0\highlight0\par
+\fs24 $\expndtw-2  \expndtw0 javac\expndtw-2  \expndtw0 Main.java\par
+$\expndtw-1  \expndtw0 java\expndtw-2  \expndtw0 Main\par
+\cf2\highlight3\fs28 The\expndtw4  \expndtw0 output\expndtw3  \expndtw0 of\expndtw4  \expndtw0 the\expndtw4  \expndtw0 test\expndtw5  \expndtw0 cases\expndtw3  \expndtw0 should\expndtw3  \expndtw0 be:\cf0\highlight0\par
+\fs24 ..\par
+
+\pard\sl360\slmult1\par
+
+\pard\li101\sl360\slmult1 Time:\expndtw-9  \expndtw0 1.135\par
+
+\pard\sl360\slmult1\par
+
+\pard\li101\sl360\slmult1 OK\expndtw-2  \expndtw0 (2\expndtw-1  \expndtw0 tests)\par
+
+\pard\li102\sl360\slmult1 This\expndtw8  \expndtw0 output\expndtw4  \expndtw0 indicates\expndtw6  \expndtw0 that\expndtw6  \expndtw0 both\expndtw5  \expndtw0 test\expndtw6  \expndtw0 cases\expndtw6  \expndtw0 passed,\expndtw5  \expndtw0 and\expndtw7  \expndtw0 the\expndtw4  \expndtw0 containerized\expndtw-57  \expndtw0 application\expndtw-1  \expndtw0 is functioning\expndtw1  \expndtw0 as expected.\par
+
+\pard\sa200\sl276\slmult1\f4\fs22\par
+}
+ 
