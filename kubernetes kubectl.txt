@@ -1,0 +1,249 @@
+Week-9 Integrate Kubernetes and Docker 
+
+C:\Program Files\Docker>winget install -e --id Kubernetes.kubectl
+
+The `msstore` source requires that you view the following agreements before using.
+Terms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction
+The source requires the current machine's 2-letter geographic region to be sent to the backend service to function properly (ex. "US").
+
+Do you agree to all the source agreements terms?
+[Y] Yes  [N] No: y
+Found kubectl [Kubernetes.kubectl] Version 1.30.2
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://dl.k8s.io/release/v1.30.2/bin/windows/amd64/kubectl.exe
+  ██████████████████████████████  50.3 MB / 50.3 MB
+Successfully verified installer hash
+Starting package install...
+Path environment variable modified; restart your shell to use the new value.
+Command line alias added: "kubectl"
+Successfully installed
+
+C:\Program Files\Docker>kubectl version --client
+Client Version: v1.30.2
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+
+
+
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>docker build -t user-reg .
+[+] Building 5.6s (7/7) FINISHED                                                                   docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 121B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    3.2s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 860B                                                                                  0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:2140dad235c130ac861018a4e13a6bc8aea3a35f3a40e20c1b060d51a7ef  1.9s
+ => => resolve docker.io/library/nginx:alpine@sha256:2140dad235c130ac861018a4e13a6bc8aea3a35f3a40e20c1b060d51a7ef  0.0s
+ => => sha256:45eb579d59b22c5e0595361f49fbeeba137c526f597666eb2cfa7c91c5779349 1.40kB / 1.40kB                     0.3s
+ => => sha256:472934715761932c17e60819e5a424f4a1a527413ac60952d4c72697d7a02f6b 15.10MB / 15.10MB                   1.0s
+ => => sha256:379754eea6a7cab18b781ab577b2668c2a5a6e0181c9712cfb9b4871a7ef1a8e 1.21kB / 1.21kB                     0.9s
+ => => sha256:fd072e74e282316f9f012356a6dfe3d97040535b03de6600ab0cf4c5379fc4d6 404B / 404B                         1.0s
+ => => sha256:f99ac9ba1313c45bf9b3ab78f8de953ef9da22b2563d562afbcfa51cabb47d7c 957B / 957B                         0.7s
+ => => sha256:596d53a7de8832c0963cd374bf19a0a1ca2284c80329e1a1462c4f51035ae0c8 629B / 629B                         0.3s
+ => => sha256:d1171b13e41264c85467ed40468d24ab5e9d63c34730790c779da2444e6bc3ca 1.76MB / 1.76MB                     0.4s
+ => => extracting sha256:d1171b13e41264c85467ed40468d24ab5e9d63c34730790c779da2444e6bc3ca                          0.1s
+ => => extracting sha256:596d53a7de8832c0963cd374bf19a0a1ca2284c80329e1a1462c4f51035ae0c8                          0.0s
+ => => extracting sha256:f99ac9ba1313c45bf9b3ab78f8de953ef9da22b2563d562afbcfa51cabb47d7c                          0.0s
+ => => extracting sha256:fd072e74e282316f9f012356a6dfe3d97040535b03de6600ab0cf4c5379fc4d6                          0.0s
+ => => extracting sha256:379754eea6a7cab18b781ab577b2668c2a5a6e0181c9712cfb9b4871a7ef1a8e                          0.0s
+ => => extracting sha256:45eb579d59b22c5e0595361f49fbeeba137c526f597666eb2cfa7c91c5779349                          0.0s
+ => => extracting sha256:472934715761932c17e60819e5a424f4a1a527413ac60952d4c72697d7a02f6b                          0.2s
+ => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                         0.1s
+ => exporting to image                                                                                             0.2s
+ => => exporting layers                                                                                            0.1s
+ => => exporting manifest sha256:206352a7e8070fc6d9a976249998ee5b15b507d5f20c26674fd6892c1a95c537                  0.0s
+ => => exporting config sha256:72f6ff31c2d223420b10facda944dd148bf34d593cf6837840009fc5dccce932                    0.0s
+ => => exporting attestation manifest sha256:5b8887cae175e27e2e3d74a0fee2e02c63be02891ded0baa8515a87536d50ca7      0.0s
+ => => exporting manifest list sha256:52809a9f38c35a2725ae259108f823054c504b9c71cd871f7be90936932db5ad             0.0s
+ => => naming to docker.io/library/user-reg:latest                                                                 0.0s
+ => => unpacking to docker.io/library/user-reg:latest                                                              0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/usanh1ra849d0pig39mgr03o5
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>docker run -d -p 8080:80 user-reg
+a52298c257d6629f0a6513496f53af2cdd481f88863ebff47541996327e15ae9
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl version --client
+Client Version: v1.30.2
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl apply -f deployment.yaml
+deployment.apps/user-registration-deployment created
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl apply -f service.yaml
+service/user-registration-service created
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl get deployments
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx                       1/1     1            1           11d
+user-registration-deployment   0/2     2            0           29s
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl get services
+NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP        11d
+my-nginx                    NodePort    10.109.245.32   <none>        88:30765/TCP   11d
+user-registration-service   NodePort    10.97.218.51    <none>        80:30080/TCP   31s
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl get pods
+NAME                                            READY   STATUS             RESTARTS      AGE
+my-nginx-544b86ccd5-4zt57                       1/1     Running            3 (35m ago)   11d
+user-registration-deployment-6bcbd45cf4-949zq   0/1     ImagePullBackOff   0             12m
+user-registration-deployment-6bcbd45cf4-sqvbg   0/1     ImagePullBackOff   0             12m
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl logs user-registration-deployment-6bcbd45cf4-949zq
+Error from server (BadRequest): container "user-registration" in pod "user-registration-deployment-6bcbd45cf4-949zq" is waiting to start: trying and failing to pull image
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl logs user-registration-deployment-6bcbd45cf4-sqvbg
+Error from server (BadRequest): container "user-registration" in pod "user-registration-deployment-6bcbd45cf4-sqvbg" is waiting to start: trying and failing to pull image
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>docker tag user-reg vinay856/user-reg
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>docker push vinay856/user-reg
+Using default tag: latest
+The push refers to repository [docker.io/vinay856/user-reg]
+472934715761: Pushed
+0b2651b067ff: Pushed
+596d53a7de88: Pushed
+379754eea6a7: Pushed
+45eb579d59b2: Pushed
+43c4264eed91: Pushed
+0819733cf6bf: Pushed
+f99ac9ba1313: Pushed
+d1171b13e412: Pushed
+fd072e74e282: Pushed
+latest: digest: sha256:52809a9f38c35a2725ae259108f823054c504b9c71cd871f7be90936932db5ad size: 856
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl apply -f deployment.yaml
+deployment.apps/user-registration-deployment configured
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl apply -f service.yaml
+service/user-registration-service unchanged
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl get deployments
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx                       1/1     1            1           11d
+user-registration-deployment   2/2     2            2           22m
+
+C:\Users\VAAGDEVI\Desktop\User-Reg>kubectl get services
+NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP        11d
+my-nginx                    NodePort    10.109.245.32   <none>        88:30765/TCP   11d
+user-registration-service   NodePort    10.97.218.51    <none>        80:30080/TCP   22m
+
+
+
+Access the Port Number:
+
+http://localhost:30080
+
+
+
+
+
+
+
+
+
+
+The ImagePullBackOff status indicates that Kubernetes is having trouble pulling the Docker image for your user registration application. This is often due to one of the following issues:
+
+Image Not Found: Ensure that the image user-reg is available in the Docker registry you are using (Docker Hub or a private registry). Since you built the image locally, Kubernetes cannot access it unless it's pushed to a registry.
+
+To push the image to Docker Hub, you can do the following:
+
+
+docker tag user-reg <your-dockerhub-username>/user-reg
+docker push <your-dockerhub-username>/user-reg
+Replace <your-dockerhub-username> with your actual Docker Hub username.
+
+Incorrect Image Name in Deployment: Verify that the image name specified in your deployment.yaml file matches the image name you pushed. It should look something like this:
+
+spec:
+  containers:
+    - name: user-registration
+      image: <your-dockerhub-username>/user-reg
+Network Issues: If you are using a private registry or if your cluster has network restrictions, ensure that it can reach the registry.
+
+Local Development Context: If you are running your Kubernetes cluster locally (like with Minikube or Docker Desktop), you may also use the local image directly by specifying the image field as follows, but ensure your setup supports this:
+
+spec:
+  containers:
+    - name: user-registration
+      image: user-reg  # No repository
+Redeploy After Changes: If you make any changes to your deployment.yaml, apply the changes again:
+
+
+kubectl apply -f deployment.yaml
+Next Steps:
+Push the image to a registry if it’s not there.
+Update your deployment.yaml file if necessary.
+Redeploy and check the status of the pods again.
+
+
+
+
+
+The error message you're seeing indicates that the image vinay856/user-reg:latest cannot be deleted because it is currently in use by a container. To resolve this, you need to follow these steps:
+
+List Containers: Check which containers are using the image. You can do this with the command:
+
+
+docker ps -a --filter "ancestor=vinay856/user-reg:latest"
+Stop and Remove Containers: If you find any containers using the image, you need to stop and remove them. Use the following commands:
+
+docker stop <container_id>
+docker rm <container_id>
+Replace <container_id> with the actual ID or name of the container(s).
+
+Delete the Image: After removing the containers, you should be able to delete the image:
+
+
+docker rmi vinay856/user-reg:latest
+
+
+
+
+
+
+
+
+
+
+
+C:\Program Files\Docker>docker ps -a --filter "ancestor=vinay856/user-reg:latest"
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS                     PORTS                  NAMES
+c7efc600ce5e   52809a9f38c3   "/docker-entrypoint.…"   About a minute ago   Up About a minute                                 k8s_user-registration_user-registration-deployment-74b9d6d6dd-t5blz_default_470ea040-a9c7-4ef8-b116-038d5c1c4d2e_8
+4c574b7c37c1   52809a9f38c3   "/docker-entrypoint.…"   About a minute ago   Up About a minute                                 k8s_user-registration_user-registration-deployment-74b9d6d6dd-s2dm2_default_4490129c-c622-4661-b92e-01f8b3b3e0e3_9
+a52298c257d6   52809a9f38c3   "/docker-entrypoint.…"   4 weeks ago          Exited (255) 2 weeks ago   0.0.0.0:8080->80/tcp   agitated_archimedes
+
+C:\Program Files\Docker>docker stop c7efc600ce5e
+c7efc600ce5e
+
+C:\Program Files\Docker>docker stop 4c574b7c37c1
+4c574b7c37c1
+
+C:\Program Files\Docker>docker stop a52298c257d6
+a52298c257d6
+
+C:\Program Files\Docker>docker rm a52298c257d6
+a52298c257d6
+
+C:\Program Files\Docker>docker rm 4c574b7c37c1
+4c574b7c37c1
+
+C:\Program Files\Docker>docker rm c7efc600ce5e
+c7efc600ce5e
+
+C:\Program Files\Docker>docker rmi vinay856/user-reg:latest
+Error response from daemon: conflict: unable to delete vinay856/user-reg:latest (must be forced) - container adc16dd311b8 is using its referenced image 52809a9f38c3
+
+C:\Program Files\Docker>docker rmi -f vinay856/user-reg:latest
+Untagged: vinay856/user-reg:latest
+
+C:\Program Files\Docker>

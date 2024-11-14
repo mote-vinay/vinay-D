@@ -1,0 +1,43 @@
+This Pc--> Local Disk(C)--->Program Files--> Docker Folder--->Docker Folder--->Resources folder--->Bin Folder--> Click on Path-->Type Cmd and Enter
+\
+
+C:\Program Files\Docker\Docker\resources\bin>
+
+kubectl version --client
+
+
+C:\Program Files\Docker\Docker\resources\bin>
+kubectl cluster-info
+
+Kubernetes control plane is running at https://kubernetes.docker.internal:6443
+CoreDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl get nodes
+NAME             STATUS   ROLES           AGE    VERSION
+docker-desktop   Ready    control-plane   8m5s   v1.30.2
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl create deployment my-nginx --image=nginx
+deployment.apps/my-nginx created
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl expose deployment my-nginx --type=NodePort --port=80
+service/my-nginx exposed
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl get deployments
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx   1/1     1            1           18s
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl get services
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        9m58s
+my-nginx     NodePort    10.106.125.57   <none>        80:30290/TCP   18s
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl expose deployment my-nginx --type=NodePort --port=88
+Error from server (AlreadyExists): services "my-nginx" already exists
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl delete service my-nginx
+service "my-nginx" deleted
+
+C:\Program Files\Docker\Docker\resources\bin>kubectl delete deployment my-nginx
+deployment.apps "my-nginx" deleted
